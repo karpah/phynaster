@@ -31,4 +31,10 @@ class FactoryDefinition extends PhynasterTestCase
     $this->assertEquals('Array', $factory->getClass());
   }
 
+  public function testCanSupplyDefaultDataForFactory()
+  {
+    $factory = Phynaster::define('test', array('defaults' => array('name' => 'Foo')));
+    $this->assertEquals(array('name' => 'Foo'), $factory->getDefaults());
+  }
+
 }

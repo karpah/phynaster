@@ -19,6 +19,9 @@ class Phynaster_Factory
   {
     if( array_key_exists('class', $data) )
       $this->class = $data['class'];
+
+    if( array_key_exists('defaults', $data) )
+      $this->defaults = $data['defaults'];
   }
 
   public function getClass()
@@ -27,5 +30,10 @@ class Phynaster_Factory
       return $this->class;
     else
       return 'Array';
+  }
+
+  public function getDefaults()
+  {
+    return $this->defaults;
   }
 }
