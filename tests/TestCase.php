@@ -1,7 +1,7 @@
 <?php
 require_once 'Phynaster.php';
 
-class PhynasterTestCase extends PHPUnit_Framework_TestCase
+abstract class PhynasterTestCase extends PHPUnit_Framework_TestCase
 {
   public function setUp()
   {

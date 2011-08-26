@@ -24,6 +24,23 @@ class Phynaster_Factory
       $this->defaults = $data['defaults'];
   }
 
+  /**
+   * Generate an instance from the factory.
+   * @return mixed
+   */
+  public function generate()
+  {
+    if( $this->class )
+      return new $this->class($this->defaults);
+    else
+      return $this->defaults;
+  }
+
+
+  /**
+   * The type of class that will be instantiated when the factory is utilized.
+   * @return string
+   */
   public function getClass()
   {
     if( $this->class )
@@ -32,6 +49,10 @@ class Phynaster_Factory
       return 'Array';
   }
 
+  /**
+   * Get the default data of this factory.
+   * @return array|null
+   */
   public function getDefaults()
   {
     return $this->defaults;

@@ -44,7 +44,7 @@ class Phynaster
     if( !array_key_exists($name, self::$factories) )
       throw new Exception_Phynaster_Undefined_Factory('Factory ' . $name . ' is not defined.');
 
-    return self::$factories[$name];
+    return self::$factories[$name]->generate();
   }
 
   /**
