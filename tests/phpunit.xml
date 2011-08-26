@@ -1,2 +1,5 @@
 <phpunit colors="true">
+  <php>
+    <includePath>../lib/</includePath>
+  </php>
 </phpunit>

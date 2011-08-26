@@ -1,5 +1,5 @@
 <?php
-require_once('../lib/Phynaster.php');
+require_once 'Phynaster.php';
 
 class BasicExceptions extends PHPUnit_Framework_TestCase
 {
