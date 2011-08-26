@@ -18,12 +18,15 @@ class Phynaster
    * @param string $name
    * @param array $data
    */
-  public static function define($name, $data)
+  public static function define($name, $data=NULL)
   {
     self::initializeFactories();
 
     if( array_key_exists($name, self::$factories) )
       throw new Exception_Phynaster_Duplicate_Factory('Factory ' . $name . ' is already defined.');
+
+    if( is_null($data) )
+      $data = array();
 
     self::$factories[$name] = new Phynaster_Factory($data);
   }
@@ -40,7 +43,7 @@ class Phynaster
     if( !array_key_exists($name, self::$factories) )
       throw new Exception_Phynaster_Undefined_Factory('Factory ' . $name . ' is not defined.');
 
-    return new self::$factories[$name]->className();
+    return self::$factories[$name];
   }
 
   // Make sure the factory array is initialized.
