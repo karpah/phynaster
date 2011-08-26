@@ -29,6 +29,7 @@ class Phynaster
       $data = array();
 
     self::$factories[$name] = new Phynaster_Factory($data);
+    return self::$factories[$name];
   }
 
   /**
@@ -44,6 +45,14 @@ class Phynaster
       throw new Exception_Phynaster_Undefined_Factory('Factory ' . $name . ' is not defined.');
 
     return self::$factories[$name];
+  }
+
+  /**
+   * Clear all defined factories.
+   */
+  public function clearFactories()
+  {
+    self::$factories = array();
   }
 
   // Make sure the factory array is initialized.

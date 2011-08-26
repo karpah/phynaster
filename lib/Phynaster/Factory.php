@@ -7,6 +7,7 @@
 
 class Phynaster_Factory
 {
+  protected $class;
   protected $associations;
   protected $defaults;
 
@@ -16,5 +17,15 @@ class Phynaster_Factory
    */
   public function __construct($data)
   {
+    if( array_key_exists('class', $data) )
+      $this->class = $data['class'];
+  }
+
+  public function getClass()
+  {
+    if( $this->class )
+      return $this->class;
+    else
+      return 'Array';
   }
 }
