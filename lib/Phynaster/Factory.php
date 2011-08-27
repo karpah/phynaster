@@ -5,11 +5,13 @@
  * @module Phynaster
  */
 
+require_once 'Zend/Adapter.php';
+
 class Phynaster_Factory
 {
-  protected $class;
   protected $associations;
   protected $defaults;
+  protected $adapter;
 
   /**
    * Create the factory.
@@ -17,11 +19,11 @@ class Phynaster_Factory
    */
   public function __construct($data)
   {
-    if( array_key_exists('class', $data) )
-      $this->class = $data['class'];
-
     if( array_key_exists('defaults', $data) )
       $this->defaults = $data['defaults'];
+
+    if( array_key_exists('adapter', $data) )
+      $this->adapter = new Phynaster_Zend_Adapter($data['adapter']);
   }
 
   /**
@@ -30,10 +32,7 @@ class Phynaster_Factory
    */
   public function generate()
   {
-    if( $this->class )
-      return new $this->class($this->defaults);
-    else
-      return $this->defaults;
+    return $this->defaults;
   }
 
 
@@ -43,10 +42,7 @@ class Phynaster_Factory
    */
   public function getClass()
   {
-    if( $this->class )
-      return $this->class;
-    else
-      return 'Array';
+    return 'Array';
   }
 
   /**

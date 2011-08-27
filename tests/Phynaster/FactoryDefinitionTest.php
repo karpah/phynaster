@@ -16,12 +16,6 @@ class FactoryDefinition extends PhynasterTestCase
     $this->assertInstanceOf('Phynaster_Factory', $factory);
   }
 
-  public function testCanDefineFactoryWithClass()
-  {
-    $factory = Phynaster::define('test', array('class' => 'Object'));
-    $this->assertEquals('Object', $factory->getClass());
-  }
-
   // Eventually, factories will have the option to either instantiate and save
   // an object themselves, or simply return an array of values for something
   // else to use in instantiation
