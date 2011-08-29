@@ -29,5 +29,4 @@ What's next
 -----------------------------
 
 * Proper support for more association types (has one, has and belongs to many)
-* Overriding of default data
-* More helpers for things like timestamps and sequences
+* Helpers for things like timestamps, sequences, and guids
