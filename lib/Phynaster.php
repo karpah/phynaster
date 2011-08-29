@@ -6,7 +6,7 @@
  * @module Phynaster
  */
 
-require_once('Phynaster/Factory.php');
+require_once 'Phynaster/Factory.php';
 
 class Phynaster
 {
@@ -48,6 +48,24 @@ class Phynaster
   }
 
   /**
+   * Generate a database adapter for a factory.
+   * @param string $type The type of adapter to define. 'Zend' is the only currently supported value.
+   * @param mixed $table A concrete instance of the database interface. For Zend adapters, a class extending Zend_Db_Table.
+   */
+  public function adapter($type, $table)
+  {
+    if( $type == 'Zend' )
+    {
+      require_once 'Phynaster/Adapter/Zend.php';;
+      return new Phynaster_Adapter_Zend($table);
+    }
+    else
+    {
+      throw new Exception_Phynaster_Undefined_Adapter('Undefined database adapter supplied: ' . $type);
+    }
+  }
+
+  /**
    * Clear all defined factories.
    */
   public function clearFactories()
@@ -67,3 +85,4 @@ class Phynaster
 
 class Exception_Phynaster_Duplicate_Factory extends Exception {}
 class Exception_Phynaster_Undefined_Factory extends Exception {}
+class Exception_Phynaster_Undefined_Adapter extends Exception {}

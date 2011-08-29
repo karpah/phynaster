@@ -5,7 +5,7 @@
  * @module Phynaster
  */
 
-require_once 'Zend/Adapter.php';
+require_once 'Association/BelongsTo.php';
 
 class Phynaster_Factory
 {
@@ -23,7 +23,9 @@ class Phynaster_Factory
       $this->defaults = $data['defaults'];
 
     if( array_key_exists('adapter', $data) )
-      $this->adapter = new Phynaster_Zend_Adapter($data['adapter']);
+    {
+      $this->adapter = $data['adapter'];
+    }
   }
 
   /**
@@ -52,5 +54,14 @@ class Phynaster_Factory
   public function getDefaults()
   {
     return $this->defaults;
+  }
+
+  /**
+   * Get the adapter defined for this factory (if any)
+   * @return mixed
+   */
+  public function getAdapter()
+  {
+    return $this->adapter;
   }
 }
