@@ -80,9 +80,6 @@ class Phynaster
   {
     self::initializeFactories();
 
-    if( !array_key_exists($factory, self::$factories) )
-      throw new Exception_Phynaster_Undefined_Factory('Factory ' . $factory . ' is not defined.');
-
     switch($type)
     {
       case Phynaster_Association::BELONGS_TO:
