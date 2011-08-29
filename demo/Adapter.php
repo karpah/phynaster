@@ -1,5 +1,4 @@
 <?php
-require_once 'helpers.php';
 require_once 'lib/Phynaster.php';
 require_once 'Zend/Db/Table.php';
 require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
@@ -10,8 +9,8 @@ Zend_Db_Table_Abstract::setDefaultAdapter($adapter);
 
 Phynaster::define('Member', array(
   'defaults' => array(
-    'name' => 'Test ' . getSequence(),
-    'guid' => generateGuid(),
+    'name' => 'Test ' . Phynaster::sequence(),
+    'guid' => Phynaster::guid(),
     'isGroup' => false
   ),
   'adapter' => Phynaster::adapter('Zend', new MemberTable),

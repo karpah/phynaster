@@ -1,17 +1,16 @@
 <?php
-require_once 'helpers.php';
 require_once 'lib/Phynaster.php';
 
 Phynaster::define('Post', array(
   'defaults' => array(
-    'id' => getSequence(),
-    'name' => 'Post ' . getSequence()
+    'id' => Phynaster::sequence('id'),
+    'name' => 'Post ' . Phynaster::sequence('name')
   )
 ));
 
 Phynaster::define('Comment', array(
   'defaults' => array(
-    'name' => 'Comment ' . getSequence(),
+    'name' => 'Comment ' . Phynaster::sequence('comment'),
     'post_id' => Phynaster::association('Post')
   )
 ));

@@ -111,6 +111,9 @@ class Phynaster
 
   // Define a sequence
   public function sequence() { return Phynaster_Helpers::sequence(); }
+
+  // Define a GUID
+  public function guid() { return Phynaster_Helpers::guid(); }
 }
 
 class Exception_Phynaster_Duplicate_Factory extends Exception {}

@@ -29,7 +29,11 @@ class Phynaster_Helpers
    */
   public static function sequence($key='default')
   {
-    self::$sequences[$key] = 1;
+    self::initializeSequences();
+
+    if( !array_key_exists($key, self::$sequences) )
+      self::$sequences[$key] = 1;
+
     return "##getSequence('$key')##";
   }
 
@@ -41,10 +45,37 @@ class Phynaster_Helpers
    */
   public static function getSequence($key)
   {
+    self::initializeSequences();
+
     if( !array_key_exists($key, self::$sequences) )
       $key = 'default';
 
     return self::$sequences[$key]++;
+  }
+
+  public function guid()
+  {
+    return self::sequence('guid');
+  }
+
+  /**
+   * Generate a unique GUID.
+   * Will be in the character groups 8-4-4-4-12.
+   * @return string
+   */
+  public static function getGuid()
+  {
+    self::guid();
+    return strtoupper('00000000-0000-0000-0000-' . str_pad((string)dechex(self::getSequence('guid')), 12, '0', STR_PAD_LEFT));
+  }
+
+  // Make sure the factory array is initialized.
+  private function initializeSequences()
+  {
+    if( !isset(self::$sequences) )
+    {
+      self::$sequences = array();
+    }
   }
 
   // Clear all defined sequences.
