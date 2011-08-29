@@ -6,6 +6,7 @@
  */
 
 require_once 'Association.php';
+require_once 'Helpers.php';
 
 class Phynaster_Factory
 {
@@ -62,6 +63,9 @@ class Phynaster_Factory
         // Pull the right value out of the array we calculated earlier
         $instanceValues[$key] = $value[$keys[$key]];
       }
+
+      // Check and convert helper methods
+      Phynaster_Helpers::evaluate($instanceValues[$key]);
     }
 
     // Utilize the adapter if one was specified

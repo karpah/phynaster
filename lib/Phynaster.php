@@ -8,6 +8,7 @@
 
 require_once 'Phynaster/Factory.php';
 require_once 'Phynaster/Association.php';
+require_once 'Phynaster/Helpers.php';
 
 class Phynaster
 {
@@ -89,9 +90,7 @@ class Phynaster
     }
   }
 
-  /**
-   * Clear all defined factories.
-   */
+  // Clear all defined factories.
   public function clearFactories()
   {
     self::$factories = array();
@@ -105,6 +104,13 @@ class Phynaster
       self::$factories = array();
     }
   }
+
+  /**
+   * Proxy functions for dealing with helper methods - these get passed directly to Phynaster_Helper
+   */
+
+  // Define a sequence
+  public function sequence() { return Phynaster_Helpers::sequence(); }
 }
 
 class Exception_Phynaster_Duplicate_Factory extends Exception {}
