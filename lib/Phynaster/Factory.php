@@ -31,19 +31,40 @@ class Phynaster_Factory
 
   /**
    * Generate an instance from the factory.
+   * @param array $data Any data to overwrite the factory's default values.
    * @return mixed
    */
-  public function generate()
+  public function generate($data)
   {
-    foreach( $this->defaults as $key => $value )
+    // When overwriting the default values, we may nuke any information about
+    // foreign keys for associations - store those first
+    $keys = array();
+    foreach( $this->defaults as $default => $value )
     {
       if( $value instanceof Phynaster_Association )
       {
-        $association = Phynaster::create($value->getFactory());
-        $this->defaults[$key] = $association[$value->foreignKey()];
+        $keys[$default] = $value->foreignKey();
       }
     }
-    return $this->defaults;
+
+    // Now we can safely merge the data without losing anything.
+    $instanceValues = array_merge($this->defaults, $data);
+    foreach( $instanceValues as $key => $value )
+    {
+      // The default association value is an instance of Association
+      if( $value instanceof Phynaster_Association )
+      {
+        $association = Phynaster::create($value->getFactory());
+        $instanceValues[$key] = $association[$value->foreignKey()];
+      }
+      // Any overwritten associations will be arrays
+      else if( is_array($value) )
+      {
+        // Pull the right value out of the array we calculated earlier
+        $instanceValues[$key] = $value[$keys[$key]];
+      }
+    }
+    return $instanceValues;
   }
 
 

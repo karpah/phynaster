@@ -36,16 +36,17 @@ class Phynaster
   /**
    * Create a instance of the factory.
    * @param string $name
+   * @param array $data
    * @return mixed
    */
-  public static function create($name)
+  public static function create($name, $data=array())
   {
     self::initializeFactories();
 
     if( !array_key_exists($name, self::$factories) )
       throw new Exception_Phynaster_Undefined_Factory('Factory ' . $name . ' is not defined.');
 
-    return self::$factories[$name]->generate();
+    return self::$factories[$name]->generate($data);
   }
 
   /**
