@@ -29,4 +29,4 @@ What's next
 -----------------------------
 
 * Proper support for more association types (has one, has and belongs to many)
-* Helpers for things like timestamps, sequences, and guids
+* More helpers for things like timestamps
