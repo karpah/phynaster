@@ -9,7 +9,6 @@ require_once 'Association.php';
 
 class Phynaster_Factory
 {
-  protected $associations;
   protected $defaults;
   protected $adapter;
 
@@ -70,16 +69,6 @@ class Phynaster_Factory
       return $this->adapter->generate($instanceValues);
     else
       return $instanceValues;
-  }
-
-
-  /**
-   * The type of class that will be instantiated when the factory is utilized.
-   * @return string
-   */
-  public function getClass()
-  {
-    return 'Array';
   }
 
   /**
