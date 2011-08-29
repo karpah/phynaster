@@ -26,6 +26,16 @@ class Phynaster_Adapter_Zend
   {
     return $this->table;
   }
+
+  /**
+   * Generate a database record from the adapter.
+   * @param array $data
+   * @return mixed
+   */
+  public function generate($data)
+  {
+    return $this->table->insert($data);
+  }
 }
 
 class Exception_Phynaster_Adapter_Invalid_DbTable extends Exception { }

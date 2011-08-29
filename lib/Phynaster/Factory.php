@@ -64,7 +64,12 @@ class Phynaster_Factory
         $instanceValues[$key] = $value[$keys[$key]];
       }
     }
-    return $instanceValues;
+
+    // Utilize the adapter if one was specified
+    if( $this->adapter )
+      return $this->adapter->generate($instanceValues);
+    else
+      return $instanceValues;
   }
 
 
