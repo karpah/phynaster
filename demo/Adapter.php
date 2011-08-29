@@ -8,15 +8,13 @@ class MemberTable extends Zend_Db_Table {}
 $adapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' => 'test'));
 Zend_Db_Table_Abstract::setDefaultAdapter($adapter);
 
-Phynaster::define('Member',
-  array(
-    'defaults' => array(
-			'name' => 'Test ' . getSequence(),
-    	'guid' => generateGuid(),
-    	'isGroup' => false
-    ),
-    'adapter' => Phynaster::adapter('Zend', MemberTable),
-  )
-);
+Phynaster::define('Member', array(
+  'defaults' => array(
+    'name' => 'Test ' . getSequence(),
+    'guid' => generateGuid(),
+    'isGroup' => false
+  ),
+  'adapter' => Phynaster::adapter('Zend', new MemberTable),
+));
 
 var_dump(Phynaster::create('Member'));

@@ -31,4 +31,12 @@ class FactoryDefinition extends PhynasterTestCase
     $this->assertEquals(array('name' => 'Foo'), $factory->getDefaults());
   }
 
+  public function testCanDefineAssociationForDefaults()
+  {
+    $association = Phynaster::define('association', array('defaults' => array('id' => 1)));
+    $base = Phynaster::define('test', array('defaults' => array('association' => Phynaster::association('association'))));
+
+    $instance = Phynaster::create('test');
+    $this->assertEquals($instance['association'], 1);
+  }
 }

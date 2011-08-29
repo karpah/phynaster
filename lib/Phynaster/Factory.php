@@ -5,7 +5,7 @@
  * @module Phynaster
  */
 
-require_once 'Association/BelongsTo.php';
+require_once 'Association.php';
 
 class Phynaster_Factory
 {
@@ -19,6 +19,7 @@ class Phynaster_Factory
    */
   public function __construct($data)
   {
+    $this->defaults = array();
     if( array_key_exists('defaults', $data) )
       $this->defaults = $data['defaults'];
 
@@ -34,6 +35,14 @@ class Phynaster_Factory
    */
   public function generate()
   {
+    foreach( $this->defaults as $key => $value )
+    {
+      if( $value instanceof Phynaster_Association )
+      {
+        $association = Phynaster::create($value->getFactory());
+        $this->defaults[$key] = $association[$value->foreignKey()];
+      }
+    }
     return $this->defaults;
   }
 

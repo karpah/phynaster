@@ -7,5 +7,5 @@ function generateGuid()
 function getSequence()
 {
   static $key = 0;
-  return $key++;
+  return ++$key;
 }
