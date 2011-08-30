@@ -55,7 +55,8 @@ class Phynaster_Helpers
 
   public function guid()
   {
-    return self::sequence('guid');
+    self::sequence('guid');
+    return '##getGuid()##';
   }
 
   /**

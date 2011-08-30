@@ -26,4 +26,11 @@ class GuidTest extends PhynasterTestCase
     // The 11th GUID should be 000B
     $this->assertEquals(Phynaster_Helpers::getGuid(), '00000000-0000-0000-0000-00000000000B');
   }
+
+  public function testCanUseAGuidInAFactory()
+  {
+    Phynaster::define('test', array('defaults' => array('guid' => Phynaster::guid())));
+    $instance = Phynaster::create('test');
+    $this->assertEquals($instance['guid'], '00000000-0000-0000-0000-000000000001');
+  }
 }
